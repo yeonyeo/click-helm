@@ -99,6 +99,12 @@ env:
     value: "update"
   - name: "secret"
     value: "thisispublickeythisispublickeythisispublickeythisispublickey"
+  - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
+    value: "classpath:springboot-storage-key.json"
+  - name: "SPRING_CLOUD_GCP_STORAGE_PROJECT_ID"
+    value: "vibrant-depth-424101-m7"
+  - name: "SPRING_CLOUD_GCP_STORAGE_BUCKET"
+    value: "cardimg_bucket"
 
 
 autoscaling:
