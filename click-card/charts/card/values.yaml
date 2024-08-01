@@ -92,14 +92,13 @@ extraEnvsFromSecret: cards-secrets
 # Additional volumes on the output Deployment definition.
 volumes:
   - name: secret-volume
-    secret:
-      secretName: cards-secrets
+    configMap:
+      name: click-card
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
   - name: secret-volume
-    mountPath: "/etc/secrets"
-    readOnly: true
+    mountPath: /gcp
 
 env:
   - name: "profiles"
@@ -112,11 +111,10 @@ env:
     value: "1234"
   - name: "SPRING_JPA_HIBERNATE_DDL_AUTO"
     value: "update"
-  - name : "storage"
-    valueFrom:
-      secretKeyRef:
-        name: cards-secrets
-        key: springboot-storage-key.json
+  - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
+    value: /gcp/springboot-storage-key.json
+  - name: storage
+    value: /gcp/springboot-storage-key.json
 
 
 autoscaling:
