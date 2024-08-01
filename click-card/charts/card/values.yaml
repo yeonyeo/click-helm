@@ -86,6 +86,21 @@ readinessProbe:
     path: /actuator/health
     port: 8080
 
+# Secrets for environment variables
+extraEnvsFromSecret: cards-secrets
+
+# Additional volumes on the output Deployment definition.
+volumes:
+  - name: secret-volume
+    secret:
+      secretName: cards-secrets
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+  - name: secret-volume
+    mountPath: "/etc/secrets"
+    readOnly: true
+
 env:
   - name: "profiles"
     value: "prod"
@@ -97,14 +112,11 @@ env:
     value: "1234"
   - name: "SPRING_JPA_HIBERNATE_DDL_AUTO"
     value: "update"
-  - name: "secret"
-    value: "thisispublickeythisispublickeythisispublickeythisispublickey"
-  - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
-    value: "classpath:springboot-storage-key.json"
-  - name: "SPRING_CLOUD_GCP_STORAGE_PROJECT_ID"
-    value: "vibrant-depth-424101-m7"
-  - name: "SPRING_CLOUD_GCP_STORAGE_BUCKET"
-    value: "cardimg_bucket"
+  - name : "storage"
+    valueFrom:
+      secretKeyRef:
+        name: cards-secrets
+        key: springboot-storage-key.json
 
 
 autoscaling:
@@ -115,14 +127,14 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
+# volumes: []
 # - name: foo
 #   secret:
 #     secretName: mysecret
 #     optional: false
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
+# volumeMounts: []
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
