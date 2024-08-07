@@ -124,9 +124,7 @@ env:
     value: file:gcp/springboot-storage-key.json
   - name: storage
     value: /gcp/springboot-storage-key.json
-  
-  - name: SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION
-    value: "/etc/gcp/gcp-credentials.json"
+ 
 
 
 
