@@ -96,9 +96,18 @@ volumes:
       name: click-card
 
 # Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+  - name: secret-volume
+    mountPath: /gcp
+# volumes:
+#   - name: gcp-credentials
+#     secret:
+#     secretName: gcp-credentials
+
 # volumeMounts:
-#   - name: secret-volume
-#     mountPath: /gcp
+#   - name: gcp-credentials
+#     mountPath: "/etc/gcp"
+#     readOnly: true
 
 env:
   - name: "profiles"
@@ -111,10 +120,16 @@ env:
     value: "1234"
   - name: "SPRING_JPA_HIBERNATE_DDL_AUTO"
     value: "update"
-  # - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
-  #   value: file:gcp/springboot-storage-key.json
-  # - name: storage
-  #   value: /gcp/springboot-storage-key.json
+  - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
+    value: file:gcp/springboot-storage-key.json
+    # value: file:/home/sylim0513/.ssh/storage_key
+  - name: storage
+    value: /gcp/springboot-storage-key.json
+  
+  - name: SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION
+    value: "/etc/gcp/gcp-credentials.json"
+
+
 
 
 autoscaling:
