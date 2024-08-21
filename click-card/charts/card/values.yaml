@@ -122,7 +122,7 @@ env:
     value: "update"
   - name: "SPRING_CLOUD_GCP_STORAGE_CREDENTIALS_LOCATION"
     # value: file:gcp/springboot-storage-key.json
-    value: /springboot-storage-key.json
+    value: file:/springboot-storage-key.json
   - name: storage
     value: /springboot-storage-key.json
  
