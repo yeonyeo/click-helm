@@ -96,9 +96,9 @@ volumes:
       name: click-card
 
 # Additional volumeMounts on the output Deployment definition.
-# volumeMounts:
-#   - name: secret-volume
-#     mountPath: /gcp
+volumeMounts:
+  - name: secret-volume
+    mountPath: /gcp
 # volumes:
 #   - name: gcp-credentials
 #     secret:
