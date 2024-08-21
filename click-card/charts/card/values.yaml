@@ -90,10 +90,10 @@ readinessProbe:
 extraEnvsFromSecret: cards-secrets
 
 # Additional volumes on the output Deployment definition.
-volumes:
-  - name: secret-volume
-    configMap:
-      name: click-card
+# volumes:
+#   - name: secret-volume
+#     configMap:
+#       name: click-card
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
